@@ -194,7 +194,7 @@ Feature yang memiliki variasi terbanyak yaitu pada person_education, person_home
 
 ![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/multi_loan_intent.png?raw=true)
 
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/multi_loant_defaults.png?raw=true)
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/multi_loan_defaults.png?raw=true)
 
 - person_gender : Jenis kelamin tidak memiliki pengaruh besar dalam penerimaan pengajuan loan.
 - person_education : Yang paling banyak diterima dalam pengajuan loan yaitu untuk Rent.
