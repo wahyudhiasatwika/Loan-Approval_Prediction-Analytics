@@ -100,7 +100,7 @@ Dapat dilihat pada kolom max di kolom umur, terdapat kejanggalan dimana terdapat
   62.  60.  55.  52.  64.  70.  78.  69.  56.  73.  63.  94.  80.  84.
   76.  67. 116. 109.]
 
-Dikarenakan dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun seperti dibawah ini
+Dikarenakan dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun dengan cara filter umur dan data menjadi 44961.
 
 #### Handling Missing Value
 
