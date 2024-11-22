@@ -92,6 +92,8 @@ Digunakan describe() untuk memberikan informasi statistik.
 - 75% adalah kuartil ketiga.
 - Max adalah nilai maksimum.
 
+Dapat dilihat pada kolom max di kolom umur, terdapat kejanggalan dimana terdapat umur maksimal 144. 
+
 [ 22.  21.  25.  23.  24.  26. 144. 123.  20.  32.  34.  29.  33.  28.
   35.  31.  27.  30.  36.  40.  50.  45.  37.  39.  44.  43.  41.  46.
   38.  47.  42.  48.  49.  58.  65.  51.  53.  66.  61.  54.  57.  59.
