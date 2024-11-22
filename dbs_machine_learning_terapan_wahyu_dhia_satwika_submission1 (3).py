@@ -16,7 +16,7 @@ Original file is located at
 
 ### Goals
 - Mengembangkan model prediksi yang mampu menentukan status persetujuan pinjaman dengan akurasi tinggi.
-- Mengidentifikasi faktor-faktor kunci yang memengaruhi kelayakan pinjaman sehingga dapat digunakan untuk mengoptimalkan proses persetujuan.
+- Mengidentifikasi faktor-faktor yang memengaruhi kelayakan pinjaman sehingga dapat digunakan untuk mengoptimalkan proses persetujuan.
 
 ### Solution Statements
 - Membangun model machine learning untuk klasifikasi persetujuan pinjaman.
@@ -308,6 +308,8 @@ X
 
 y
 
+"""### Data Modelling"""
+
 models = {
     "Random Forest": RandomForestClassifier(),
     "Logistic Regression": LogisticRegression(max_iter=1000),
@@ -326,6 +328,8 @@ models = {
 4. Support Vector Classifier adalah algoritma berbasis Support Vector Machine (SVM) yang mencari hyperplane optimal untuk memisahkan kelas dalam dataset.
 
 5. K-Nearest Neighbors (KNN) adalah algoritma berbasis instance yang mengklasifikasikan data baru berdasarkan jarak (misalnya, Euclidean) ke 𝑘 tetangga terdekat.
+
+### Evaluation
 """
 
 # KFold Cross-Validation
