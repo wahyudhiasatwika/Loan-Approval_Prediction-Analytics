@@ -486,7 +486,7 @@ for name, model in models.items():
 - **Ya**, model dapat memprediksi persetujuan peminjaman dengan akurasi yang cukup tinggi.
 
 ##### Apakah Solusi yang Direncanakan Berdampak?
-- **Ya**, solusi ini berdampak positif karena mengurangi waktu evaluasi persetujuan pinjaman secara signifikan dan meminimalkan risiko kredit macet karena dapat dilakukan secara otomatis
+- **Ya**, solusi ini berdampak positif karena mengurangi waktu evaluasi persetujuan pinjaman secara signifikan dan meminimalkan risiko kredit lambat karena dapat dilakukan secara otomatis
 """
 
 sorted_results = sorted(results.items(), key=lambda x: x[1]["KFold Accuracy"], reverse=True)

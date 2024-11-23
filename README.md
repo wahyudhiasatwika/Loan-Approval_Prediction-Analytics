@@ -375,7 +375,7 @@ Parameter:
 - **Ya**, model dapat memprediksi persetujuan peminjaman dengan akurasi yang cukup tinggi. 
 
 ##### Apakah Solusi yang Direncanakan Berdampak?
-- **Ya**, solusi ini berdampak positif karena mengurangi waktu evaluasi persetujuan pinjaman secara signifikan dan meminimalkan risiko kredit macet karena dapat dilakukan secara otomatis
+- **Ya**, solusi ini berdampak positif karena mengurangi waktu evaluasi persetujuan pinjaman secara signifikan dan meminimalkan risiko kredit lambat karena dapat dilakukan secara otomatis
 
 ### Algoritma Terbaik
 
