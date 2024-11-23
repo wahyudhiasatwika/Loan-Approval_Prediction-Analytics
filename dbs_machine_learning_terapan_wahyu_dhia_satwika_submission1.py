@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DBS_Machine Learning Terapan_Wahyu Dhia Satwika_Submission1
+"""DBS_Machine_Learning_Terapan_Wahyu_Dhia_Satwika_Submission1.ipynb
 
 # Predictive Analytics : Loan Approval Prediction
 
@@ -18,7 +18,7 @@
 - Menganalisis variabel yang ada di dalam dataset untuk menemukan fitur-fitur yang paling berpengaruh dalam keputusan persetujuan pinjaman.
 
 ## Data Understanding
-Dataset Loan Approval yang berasal dari kaggle merupakan sebuah dataset sintetis yang berdasarkan dari [_(Sumber Utama)_] (https://www.kaggle.com/datasets/laotse/credit-risk-dataset). Dataset Loan Approval memiiliki 45000 records dengan 14 variabel, dengan rincian sebagai berikut:
+Dataset Loan Approval yang berasal dari kaggle merupakan sebuah dataset sintetis yang berdasarkan dari [(Sumber Utama)](https://www.kaggle.com/datasets/laotse/credit-risk-dataset). Dataset Loan Approval memiiliki 45000 records dengan 14 variabel, dengan rincian sebagai berikut:
 
 ## Data Understanding
 Pada tahap ini dilakukan proses analisis untuk memahami dataset secara mendalam
@@ -133,7 +133,29 @@ IQR = Q3 - Q1
 
 df = data_fixed[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]
 
-"""Pada tahap ini dilakukan filtering outliers untuk disimpan ke dalam dataframe"""
+"""Pada tahap ini dilakukan filtering outliers untuk disimpan ke dalam dataframe.
+
+```selected_cols = data_fixed[numerical_feature]```
+Pada baris ini, kita memilih kolom numerik dari dataset ```data_fixed``` berdasarkan daftar ```numerical_feature```
+
+```Q1 = selected_cols.quantile(0.25)```
+```Q3 = selected_cols.quantile(0.75)```
+```IQR = Q3 - Q1```
+
+- Q1 (Kuartil 1): Nilai yang memisahkan 25% data terendah dari 75% data lainnya.
+- Q3 (Kuartil 3): Nilai yang memisahkan 75% data terendah dari 25% data tertinggi.
+- IQR (Interquartile Range): Rentang antara Q3 dan Q1. Ini mengukur sebaran nilai tengah dari data.
+
+```df = data_fixed[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]```
+
+- Nilai yang lebih kecil dari Q1-1.5 x IQR dianggap Outlier Bawah
+- Nilai yang lebih besar dari Q3+1.5 x IQR dianggap Outlier Atas
+
+```~```: Berguna untuk membalikkan hasil, memilih data yang tidak mengandung outliers.
+```any(axis=1)```: Mengevaluasi apakah ada kolom dalam satu baris yang memenuhi kriteria outliers.
+
+
+"""
 
 df.shape
 
@@ -278,6 +300,8 @@ plt.show()
 Teknik yang digunakan:
 - Label Encoding : Mengubah kategori menjadi tipe data numerik
 - Train-test split data : Data dibagi menjadi 80% Train dan 20% Test
+
+#### Label Encoding
 """
 
 data_encoded = df.copy()
@@ -289,6 +313,8 @@ for column in ['person_gender', 'person_education', 'person_home_ownership', 'lo
 """Untuk feature categorical seperti umur, edukasi, kepimilikan tempat tinggal, tujuan loan, indikator default peminjaman sebelumnya akan diubah menjadi angka menggunakan LabelEncoder()"""
 
 data_encoded.head()
+
+"""#### Train-test Split Data"""
 
 # Separate features and target variable
 X = data_encoded.drop(columns=['loan_status'])
@@ -314,15 +340,105 @@ models = {
 }
 
 """Digunakan 5 model yaitu Random Forest, Logistic Regression, Decision Tree, SVC, dan KNN untuk mencari tahu model yang terbaik.
-1. Random Forest adalah algoritma ensemble berbasis pohon keputusan. Algoritma ini membangun banyak pohon keputusan secara acak pada subset data, kemudian menggabungkan hasil prediksi dari masing-masing pohon dengan metode voting
+##### Random Forest
+Random Forest adalah algoritma ensemble berbasis pohon keputusan. Algoritma ini membangun banyak pohon keputusan secara acak pada subset data, kemudian menggabungkan hasil prediksi dari masing-masing pohon dengan metode voting
 
-2. Logistic Regression adalah model statistik yang digunakan untuk klasifikasi biner. Model ini memperkirakan probabilitas kelas menggunakan fungsi sigmoid.
+Parameter:
+- n_estimators=100: Jumlah pohon dalam hutan.
+- criterion='gini': Kriteria untuk mengukur kualitas split (menggunakan Gini impurity).
+- max_depth=None: Tidak ada batasan untuk kedalaman pohon.
+- min_samples_split=2: Jumlah minimal sampel yang diperlukan untuk membagi node.
+- min_samples_leaf=1: Jumlah minimal sampel per daun.
+- bootstrap=True: Menggunakan pengambilan sampel ulang (bootstrap) untuk membuat setiap pohon.
+- random_state=None: Tidak ada nilai seed tetap untuk reproduktivitas secara default.
 
-3. Decision Tree adalah algoritma yang membagi data ke dalam kelompok berdasarkan fitur dengan aturan "if-then". Algoritma ini membuat keputusan dengan struktur pohon.
+##### Logistic Regression
+Logistic Regression adalah model statistik yang digunakan untuk klasifikasi biner. Model ini memperkirakan probabilitas kelas menggunakan fungsi sigmoid.
 
-4. Support Vector Classifier adalah algoritma berbasis Support Vector Machine (SVM) yang mencari hyperplane optimal untuk memisahkan kelas dalam dataset.
+Parameter:
+- penalty='l2': Regularisasi L2 digunakan secara default.
+- dual=False: Tidak menggunakan formulasi dual (hanya berlaku untuk solver liblinear).
+- C=1.0: Parameter regulasi (invers dari kekuatan regularisasi).
+- solver='lbfgs': Metode optimisasi digunakan untuk fitting (cocok untuk dataset kecil hingga menengah).
+- multi_class='auto': Memilih strategi multi-klasifikasi berdasarkan jumlah kelas (binary menggunakan ovr, multi-class menggunakan softmax).
+- random_state=None: Tidak ada seed tetap untuk reproduksi.
 
-5. K-Nearest Neighbors (KNN) adalah algoritma berbasis instance yang mengklasifikasikan data baru berdasarkan jarak (misalnya, Euclidean) ke 𝑘 tetangga terdekat.
+##### Decision Tree
+Decision Tree adalah algoritma yang membagi data ke dalam kelompok berdasarkan fitur dengan aturan "if-then". Algoritma ini membuat keputusan dengan struktur pohon.
+Parameter
+
+Parameter:
+- criterion='gini': Kriteria untuk mengukur kualitas split.
+- splitter='best': Memilih pemisahan terbaik (dibandingkan dengan metode acak).
+- max_depth=None: Tidak ada batasan untuk kedalaman pohon.
+- min_samples_split=2: Jumlah minimal sampel yang diperlukan untuk membagi node.
+- min_samples_leaf=1: Jumlah minimal sampel per daun.
+- random_state=None: Tidak ada seed tetap untuk reproduktivitas.
+
+##### Support Vector Classifier
+Support Vector Classifier adalah algoritma berbasis Support Vector Machine (SVM) yang mencari hyperplane optimal untuk memisahkan kelas dalam dataset.
+
+Parameter:
+- C=1.0: Parameter regulasi (trade-off antara kesalahan klasifikasi dan margin keputusan).
+- kernel='rbf': Kernel radial basis function (RBF) digunakan.
+- degree=3: Degree untuk kernel polynomial (tidak digunakan untuk kernel RBF).
+- gamma='scale': Parameter kernel yang dihitung berdasarkan jumlah fitur.
+- random_state=None: Tidak ada seed tetap untuk reproduksi.
+- probability=False: Tidak mengaktifkan probabilitas estimasi.
+
+##### K-Nearest Neighbors (KNN)
+ K-Nearest Neighbors adalah algoritma berbasis instance yang mengklasifikasikan data baru berdasarkan jarak (misalnya, Euclidean) ke 𝑘 tetangga terdekat.
+
+Parameter:
+- n_neighbors=5: Jumlah tetangga terdekat yang digunakan.
+- weights='uniform': Semua tetangga memiliki bobot yang sama.
+- algorithm='auto': Memilih algoritma terbaik (di antara ball_tree, kd_tree, dan brute) berdasarkan data.
+- leaf_size=30: Ukuran daun untuk BallTree atau KDTree.
+- p=2: Nilai parameter jarak Minkowski (2 = Euclidean distance).
+
+
+---
+
+#### Kelebihan dan Kekurangan Model
+
+##### 1. **Random Forest**
+- **Kelebihan**:
+  - Hasil akurasi tinggi pada data latih dan uji.
+  - Dapat menangani data dengan dimensi tinggi dan korelasi antar fitur.
+- **Kekurangan**:
+  - Waktu komputasi lebih tinggi dibandingkan model sederhana seperti Logistic Regression.
+
+##### 2. **Logistic Regression**
+- **Kelebihan**:
+  - Model yang cepat dan sederhana, cocok untuk dataset yang tidak terlalu kompleks.
+  - Mudah diinterpretasikan (koefisien dapat menunjukkan pengaruh setiap fitur).
+- **Kekurangan**:
+  - Tidak mampu menangkap hubungan non-linear antara variabel.
+
+##### 3. **Decision Tree**
+- **Kelebihan**:
+  - Mudah diinterpretasikan secara visual.
+  - Kemampuan untuk menangani fitur numerik dan kategorikal tanpa preprocessing yang ekstensif.
+- **Kekurangan**:
+  - Rentan terhadap overfitting jika tidak dilakukan pruning.
+
+##### 4. **Support Vector Classifier (SVC)**
+- **Kelebihan**:
+  - Cocok untuk data dengan dimensi tinggi.
+  - Memberikan solusi optimal untuk margin keputusan.
+- **Kekurangan**:
+  - Performanya rendah dibandingkan model lain dalam eksperimen ini.
+  - Tidak skala dengan baik pada dataset besar.
+
+##### 5. **K-Nearest Neighbors (KNN)**
+- **Kelebihan**:
+  - Model non-parametrik, cocok untuk data dengan distribusi kompleks.
+  - Implementasi sederhana.
+- **Kekurangan**:
+  - Waktu prediksi lambat untuk dataset besar.
+  - Sensitif terhadap ukuran dataset dan pemilihan parameter `k`.
+
+---
 
 ### Evaluation
 """
@@ -352,15 +468,25 @@ for name, model in models.items():
     print(f"  Train Accuracy: {train_accuracy:.4f}")
     print(f"  K-Fold Accuracy: {kfold_accuracy:.4f}")
 
-"""Pada evaluasi digunakan 5 fold yang artinya dataset akan dibagi menjadi 5 subset
+"""#### K-Fold Cross-Validation
+- Pada evaluasi ini digunakan **5 fold**, artinya dataset dibagi menjadi 5 subset.
+- Setiap subset digunakan bergantian sebagai data uji, sementara subset lainnya digunakan sebagai data latih.
 
+##### Alasan Menggunakan K-Fold Cross Validation:
+1. **Evaluasi Konsisten**: Membagi data ke dalam beberapa lipatan memberikan evaluasi model yang lebih stabil, karena setiap data digunakan sebagai data latih dan uji.
+2. **Mengurangi Bias**: Dengan evaluasi pada berbagai subset data, potensi bias dari pembagian data secara acak dapat diminimalkan.
+3. **Generalisasi Model**: Memberikan gambaran lebih baik tentang bagaimana model akan bekerja pada data baru.
 
-#### Alasan Memakai Evaluasi K-Fold Cross Validation
+#### Dampak Model terhadap Business Understanding
 
-- Membagi data menjadi beberapa lipatan memungkinkan evaluasi model yang lebih konsisten karena setiap data akan digunakan sebagai data latih dan data uji.
-- Dengan melakukan evaluasi pada berbagai subset data, K-Fold Cross-Validation mengurangi bias yang mungkin muncul akibat pembagian data secara acak.
-- Memberikan gambaran model nantinya akan bekerja untuk data yang baru.
+##### Apakah Model Menjawab Problem Statement?
+- **Ya**, model yang dikembangkan mampu memberikan solusi untuk menentukan kelayakan persetujuan pinjaman dengan **akurasi tinggi**. Random Forest menjadi model terbaik dengan K-Fold Accuracy sebesar **92.31%**.
 
+##### Apakah Model Berhasil Mencapai Goals?
+- **Ya**, model dapat memprediksi persetujuan peminjaman dengan akurasi yang cukup tinggi.
+
+##### Apakah Solusi yang Direncanakan Berdampak?
+- **Ya**, solusi ini berdampak positif karena mengurangi waktu evaluasi persetujuan pinjaman secara signifikan dan meminimalkan risiko kredit macet karena dapat dilakukan secara otomatis
 """
 
 sorted_results = sorted(results.items(), key=lambda x: x[1]["KFold Accuracy"], reverse=True)
