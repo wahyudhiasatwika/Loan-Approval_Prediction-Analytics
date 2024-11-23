@@ -18,14 +18,18 @@ Industri perbankan menghadapi tantangan besar dalam menentukan kelayakan pemohon
 - Menganalisis variabel yang ada di dalam dataset untuk menemukan fitur-fitur yang paling berpengaruh dalam keputusan persetujuan pinjaman.
 
 ## Data Understanding
-Dataset Loan Approval yang berasal dari kaggle merupakan sebuah dataset sintetis yang berdasarkan dari [_(Sumber Utama)_] (https://www.kaggle.com/datasets/laotse/credit-risk-dataset). Dataset Loan Approval memiiliki 45000 records dengan 14 variabel, dengan rincian sebagai berikut:
+Dataset Loan Approval yang berasal dari kaggle merupakan sebuah dataset sintetis yang berdasarkan dari [(Sumber Utama)](https://www.kaggle.com/datasets/laotse/credit-risk-dataset). Dataset Loan Approval memiiliki 45000 records dengan 14 variabel, dengan rincian sebagai berikut:
 
 **Informasi Dataset**
-|Judul|Loan Approval Classification|
-|Author | Ta-WEI LO|
-|Source||[Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data)
-|Visibility| Public|
-|Usability|10.00|
+# Loan Approval Classification Dataset
+
+| **Judul**       | Loan Approval Classification                                                        |                  
+|-----------------|-------------------------------------------------------------------------------------|
+| **Author**      | Ta-WEI LO                                                                           |
+| **Source**      | [Kaggle](https://www.kaggle.com/datasets/taweilo/loan-approval-classification-data) |
+| **Visibility**  | Public                                                                              |
+| **Usability**   | 10.00                                                                               |
+
 
 **Metadata**
 | Kolom                         | Deskripsi                                         | Tipe Data    |
