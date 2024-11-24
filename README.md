@@ -96,17 +96,7 @@ Digunakan describe() untuk memberikan informasi statistik.
 - 75% adalah kuartil ketiga.
 - Max adalah nilai maksimum.
 
-Dapat dilihat pada kolom max di kolom umur, terdapat kejanggalan dimana terdapat umur maksimal 144. 
-
-[ 22.  21.  25.  23.  24.  26. 144. 123.  20.  32.  34.  29.  33.  28.
-  35.  31.  27.  30.  36.  40.  50.  45.  37.  39.  44.  43.  41.  46.
-  38.  47.  42.  48.  49.  58.  65.  51.  53.  66.  61.  54.  57.  59.
-  62.  60.  55.  52.  64.  70.  78.  69.  56.  73.  63.  94.  80.  84.
-  76.  67. 116. 109.]
-
-Dikarenakan dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun dengan cara filter umur dan data menjadi 44961.
-
-#### Handling Missing Value
+#### Checking Missing Value
 
 | Kolom                            | Missing Values     |
 |----------------------------------|--------------------|
@@ -202,9 +192,21 @@ Visualisasi ini digunakan untuk mencari tahu feature apa saja yang memiliki kore
 
 ### Data Preparation
 Teknik yang digunakan:
+- Filter Data : Melakukan filter terhada data yang tidak perlu
 - Handling Outliers : Menghapus Outliers
 - Label Encoding : Untuk feature categorical seperti umur, edukasi, kepimilikan tempat tinggal, tujuan loan, indikator default peminjaman sebelumnya akan diubah menjadi angka menggunakan LabelEncoder()
 - Train-test split data : Dataset nantinya akan dibagi untuk feature menjadi variable X dan label menjadi variabel y. Untuk train dibagi menjadi 80% dan test 20%.
+
+#### Filter Data
+Dapat dilihat pada kolom max di kolom umur, terdapat kejanggalan dimana terdapat umur maksimal 144. 
+
+[ 22.  21.  25.  23.  24.  26. 144. 123.  20.  32.  34.  29.  33.  28.
+  35.  31.  27.  30.  36.  40.  50.  45.  37.  39.  44.  43.  41.  46.
+  38.  47.  42.  48.  49.  58.  65.  51.  53.  66.  61.  54.  57.  59.
+  62.  60.  55.  52.  64.  70.  78.  69.  56.  73.  63.  94.  80.  84.
+  76.  67. 116. 109.]
+
+Dikarenakan dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun dengan cara filter umur dan data menjadi 44961.
 
 #### Handling Outliers
 Outlier adalah nilai ekstrem dalam dataset yang dapat mengganggu analisis statistik dan kinerja model pembelajaran mesin. Dalam proyek ini, kami menggunakan metode **Interquartile Range (IQR)** untuk mendeteksi dan menghapus outlier dari fitur numerik.

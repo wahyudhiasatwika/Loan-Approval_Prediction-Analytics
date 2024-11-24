@@ -43,17 +43,17 @@ from sklearn.neighbors import KNeighborsClassifier
 import warnings
 warnings.filterwarnings("ignore")
 
-data = pd.read_csv("/content/loan_data.csv")
+data_fixed = pd.read_csv("/content/loan_data.csv")
 
-data
+data_fixed
 
 """### Exploratory Data Analysis
 Pada tahap ini dilakukan analisis untuk data yang ada di dalam dataset seperti dilihat
 """
 
-data.shape
+data_fixed.shape
 
-data.info()
+data_fixed.info()
 
 """Output di atas menunjukkan bahwa dataset memiliki 45000 data dan 14 kolom.
 - Terdapat 6 tipe data float64
@@ -61,7 +61,7 @@ data.info()
 - Terdapat 5 tipe data object
 """
 
-data.describe()
+data_fixed.describe()
 
 """Fungsi describe digunakan untuk memberikan informasi statistik.
 
@@ -73,20 +73,11 @@ data.describe()
 - 50% adalah kuartil kedua.
 - 75% adalah kuartil ketiga.
 - Max adalah nilai maksimum.
+
+#### Checking Missing Value
 """
 
-unique_ages = data['person_age'].unique()
-print(unique_ages)
-
-"""Dapat dilihat pada output di atas, dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun seperti dibawah ini"""
-
-data_fixed = data[data['person_age'] <= 65]
-
-data_fixed.shape
-
-"""#### Handling Missing Value"""
-
-print("Total Data Duplikat:",data.duplicated().sum())
+print("Total Data Duplikat:",data_fixed.duplicated().sum())
 
 data_fixed.isnull().sum()
 
@@ -253,20 +244,32 @@ plt.show()
 
 ### Data Preparation
 Teknik yang digunakan:
+- Filter Data : Melakukan filter terhada data yang tidak perlu
 - Handling Outliers : Menghapus Outliers
 - Label Encoding : Mengubah kategori menjadi tipe data numerik
 - Train-test split data : Data dibagi menjadi 80% Train dan 20% Test
 
-#### Handling Outliers
+#### Filter Data
 """
 
-selected_cols = data_fixed[numerical_feature]
+unique_ages = data_fixed['person_age'].unique()
+print(unique_ages)
+
+"""Dapat dilihat pada output di atas, dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 144 dimana umur 144 hampir tidak mungkin terjadi di dunia nyata. Oleh karena itu, dijadikan acuan untuk umur loan approval adalah 21 - 65 tahun seperti dibawah ini"""
+
+data_filtered = data_fixed[data_fixed['person_age'] <= 65]
+
+data_filtered.shape
+
+"""#### Handling Outliers"""
+
+selected_cols = data_filtered[numerical_feature]
 
 Q1 = selected_cols.quantile(0.25)
 Q3 = selected_cols.quantile(0.75)
 IQR = Q3 - Q1
 
-df = data_fixed[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]
+df = data_filtered[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]
 
 """Pada tahap ini dilakukan filtering outliers yang bertujuan untuk menghapus outliers atau data-data yang berada diluar IQR karena akan memberikan hasil yang signifikan kepada model jika tidak dihapus.
 
@@ -481,7 +484,7 @@ for name, model in models.items():
 #### Dampak Model terhadap Business Understanding
 
 ##### Apakah Model Menjawab Problem Statement?
-- **Ya**, model yang dikembangkan mampu memberikan solusi untuk menentukan kelayakan persetujuan pinjaman dengan **akurasi tinggi**. Random Forest menjadi model terbaik dengan K-Fold Accuracy sebesar **92.31%**.
+- **Ya**, model yang dikembangkan mampu memberikan solusi untuk menentukan kelayakan persetujuan pinjaman dengan **akurasi tinggi**. Random Forest menjadi model terbaik dengan K-Fold Accuracy sebesar **92.32%**.
 
 ##### Apakah Model Berhasil Mencapai Goals?
 - **Ya**, model dapat memprediksi persetujuan peminjaman dengan akurasi yang cukup tinggi.
