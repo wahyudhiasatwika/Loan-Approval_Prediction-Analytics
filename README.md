@@ -127,61 +127,25 @@ Dikarenakan dataset memiliki data untuk umur pengguna dengan rentang 21 hingga 1
 
 Dapat dilihat dari hasil di atas bahwa dataset tidak memiliki data duplikat dan missing value. Oleh karena itu, proses dapat dilanjutkan kepada visualisasi data
 
-#### Handling Outliers
+#### Boxplot Visualization
 
-Untuk mempermudah visualisasi data, maka di feature dibagi menjadi categorical_feature dan numerical_feature
+Untuk mempermudah visualisasi data, maka di feature dibagi menjadi categorical_feature dan numerical_feature.
 
-Di beberapa visual boxplot terdapat banyak sekali outlier. Oleh karena itu, untuk mendapatkan hasil yang lebih akurat maka perlu dihilangkan outlier tersebut dengan cara sebagai berikut
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_age.png?raw=true)
 
-## Penanganan Outlier dengan Metode IQR
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_person_income.png?raw=true)
 
-Outlier adalah nilai ekstrem dalam dataset yang dapat mengganggu analisis statistik dan kinerja model pembelajaran mesin. Dalam proyek ini, kami menggunakan metode **Interquartile Range (IQR)** untuk mendeteksi dan menghapus outlier dari fitur numerik.
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_person_emp_exp.png?raw=true)
 
-##### Langkah-Langkah Metode IQR:
-1. **Pilih Fitur Numerik**:  
-   Kolom yang berisi data numerik dipilih karena lebih rentan terhadap keberadaan outlier.
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_loan_amnt.png?raw=true)
 
-2. **Hitung Kuartil dan IQR**:  
-   - **Q1 (Kuartil 1)**: Nilai yang memisahkan 25% data terendah dari data lainnya.  
-   - **Q3 (Kuartil 3)**: Nilai yang memisahkan 75% data terendah dari 25% data tertinggi.  
-   - **IQR (Interquartile Range)**: Selisih antara Q3 dan Q1 (\( IQR = Q3 - Q1 \)).
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_loan_int_rate.png?raw=true)
 
-3. **Tentukan Ambang Batas Outlier**:  
-   - Batas bawah: \( Q1 - 1.5 \times IQR \)  
-   - Batas atas: \( Q3 + 1.5 \times IQR \)  
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_loan_percent_income.png?raw=true)
 
-4. **Filter Outlier**:  
-   Baris data dengan nilai di luar batas bawah dan atas dianggap sebagai outlier dan dihapus dari dataset.
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_cb_person_cred_hist_length.png?raw=true)
 
-### Alasan Menggunakan IQR?
-- Metode ini tahan terhadap nilai ekstrem, berbeda dengan metode yang menggunakan rata-rata atau standar deviasi.  
-- Memastikan data dalam rentang kuartil tidak terpengaruh, sehingga informasi yang penting tetap terjaga.  
-
-Sehingga hasil setelah dilakukan handling outliers seperti di bawah ini.
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot2.png?raw=true)
-
-Dapat dilihat setelah dilakukan filter untuk outliers menjadi 37549 data. Hasil Boxplot setelah difilter dapat dilihat di bawah ini.
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_age.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_person_income.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_person_emp_exp.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_amnt.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_int_rate.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_percent_income.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_cb_person_cred_hist_length.png?raw=true)
-
-![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_credit_score.png?raw=true)
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot1_credit_score.png?raw=true)
 
 Untuk rata-rata distribusi box plot dapat dilihat sebagai berikut:
 - person_age : rata-rata penggunaan loan_approval yaitu dari 23-28 tahun.
@@ -196,8 +160,6 @@ Untuk rata-rata distribusi box plot dapat dilihat sebagai berikut:
 ### EDA - Univariate Analysis
 
 # Univariate Analysis - Numerical Feature
-
-
 ![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/univariate.png?raw=true)
 
 - person_age : Distribusi dari umur memiliki angka tertinggi pada 23-24 tahun.
@@ -206,7 +168,6 @@ Untuk rata-rata distribusi box plot dapat dilihat sebagai berikut:
 - loan_int_rate : Distribusi suku bunga pinjaman memiliki angka tertinggi pada angka 11
 - credit_score : Distribusi skor kredit terdapat pada jangka angka 600-700.
 - loan_percent_income: Distribusi jumlah pinjaman sebagai persentase dari pendapat tahunan memiliki angka tertinggi pada 0.05 - 0.15.
-
 
 # Univariate Analysis - Multivariate analysis
 
@@ -241,8 +202,58 @@ Visualisasi ini digunakan untuk mencari tahu feature apa saja yang memiliki kore
 
 ### Data Preparation
 Teknik yang digunakan:
+- Handling Outliers : Menghapus Outliers
 - Label Encoding : Untuk feature categorical seperti umur, edukasi, kepimilikan tempat tinggal, tujuan loan, indikator default peminjaman sebelumnya akan diubah menjadi angka menggunakan LabelEncoder()
 - Train-test split data : Dataset nantinya akan dibagi untuk feature menjadi variable X dan label menjadi variabel y. Untuk train dibagi menjadi 80% dan test 20%.
+
+#### Handling Outliers
+Outlier adalah nilai ekstrem dalam dataset yang dapat mengganggu analisis statistik dan kinerja model pembelajaran mesin. Dalam proyek ini, kami menggunakan metode **Interquartile Range (IQR)** untuk mendeteksi dan menghapus outlier dari fitur numerik.
+
+##### Langkah-Langkah Metode IQR:
+1. **Pilih Fitur Numerik**:  
+   Kolom yang berisi data numerik dipilih karena lebih rentan terhadap keberadaan outlier.
+
+2. **Hitung Kuartil dan IQR**:  
+   - **Q1 (Kuartil 1)**: Nilai yang memisahkan 25% data terendah dari data lainnya.  
+   - **Q3 (Kuartil 3)**: Nilai yang memisahkan 75% data terendah dari 25% data tertinggi.  
+   - **IQR (Interquartile Range)**: Selisih antara Q3 dan Q1 (\( IQR = Q3 - Q1 \)).
+
+3. **Tentukan Ambang Batas Outlier**:  
+   - Batas bawah: \( Q1 - 1.5 \times IQR \)  
+   - Batas atas: \( Q3 + 1.5 \times IQR \)  
+
+4. **Filter Outlier**:  
+   Baris data dengan nilai di luar batas bawah dan atas dianggap sebagai outlier dan dihapus dari dataset.
+
+##### Alasan Menggunakan IQR?
+- Metode ini tahan terhadap nilai ekstrem, berbeda dengan metode yang menggunakan rata-rata atau standar deviasi.  
+- Memastikan data dalam rentang kuartil tidak terpengaruh, sehingga informasi yang penting tetap terjaga.  
+
+Dapat dilihat setelah dilakukan filter untuk outliers menjadi 37549 data. Hasil Boxplot setelah difilter dapat dilihat di bawah ini.
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_age.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_person_income.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_person_emp_exp.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_amnt.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_int_rate.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_loan_percent_income.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_cb_person_cred_hist_length.png?raw=true)
+
+![alt text](https://github.com/wahyudhiasatwika/Loan-Approval_Prediction-Analytics/blob/main/Gambar/boxplot_credit_score.png?raw=true)
+
+#### Label Encoding
+Untuk melakukan label encoding maka akan menggunakan function ```LabelEncoder()```. Pada tahap ini, untuk feature categorical seperti umur, edukasi, kepimilikan tempat tinggal, tujuan loan, indikator default peminjaman sebelumnya akan diubah menjadi angka menggunakan LabelEncoder()
+
+#### Train-test Split
+Pada tahap ini, dataset akan dibagi menjadi dua yaitu data train dan data test. Data train berguna untuk melatih model sedangkan data test berguna untuk menguji performa dari model. 
+```X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)```
+Pada tahap ini, dibagi menjadi 80% data train dan 20% data test.
 
 ### Data Modelling
 Digunakan 5 model yaitu Random Forest, Logistic Regression, Decision Tree, SVC, dan KNN untuk mencari tahu model yang terbaik.
